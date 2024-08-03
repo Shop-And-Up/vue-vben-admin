@@ -23,8 +23,8 @@
     "errMsg505": "The http version does not support the request!"
   },
   "app": {
-    "logoutTip": "Reminder",
-    "logoutMessage": "Confirm to exit the system?",
+    "logoutTip": "Logout",
+    "logoutMessage": "Do you want to logout?",
     "menuLoading": "Menu loading..."
   },
   "errorLog": {

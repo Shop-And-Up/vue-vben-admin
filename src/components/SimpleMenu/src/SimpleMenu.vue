@@ -15,6 +15,17 @@
         :collapse="collapse"
       />
     </template>
+
+    <div v-if="!appBridgeStore.getIsEmbedded" class="flex items-center justify-center mt-4">
+      <a-button
+        @click="handleLoginOut"
+        preIcon="hugeicons:logout-04"
+        type="link"
+        class="text-gray !hover:text-white"
+      >
+        Logout
+      </a-button>
+    </div>
   </Menu>
 </template>
 <script lang="ts" setup>
@@ -32,6 +43,8 @@
   import { isFunction, isHttpUrl } from '@/utils/is';
   import { openWindow } from '@/utils';
   import { useOpenKeys } from './useOpenKeys';
+  import { useUserStore } from '@/store/modules/user';
+  import { useShopifyAppBridgeStore } from '@/store/modules/shopifyAppBridge';
 
   defineOptions({ name: 'SimpleMenu', inheritAttrs: false });
 
@@ -54,6 +67,8 @@
   const emit = defineEmits(['menuClick']);
 
   const attrs = useAttrs();
+  const userStore = useUserStore();
+  const appBridgeStore = useShopifyAppBridgeStore();
 
   const currentActiveMenu = ref('');
   const isClickGo = ref(false);
@@ -141,6 +156,11 @@
     isClickGo.value = true;
     setOpenKeys(key);
     menuState.activeName = key;
+  }
+
+  //  login out
+  function handleLoginOut() {
+    userStore.confirmLoginOut();
   }
 </script>
 <style lang="less">

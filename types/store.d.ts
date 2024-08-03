@@ -43,6 +43,22 @@ export interface UserInfo {
   desc?: string;
   homePath?: string;
   roles: RoleInfo[];
+  email?: string;
+  uuid?: string;
+  myshopify_domain?: string;
+  quota_reach_limit?: boolean;
+  quota_visible_logo?: boolean;
+  quota_view?: number;
+  quota_reset_on: any;
+  f_trial_days?: number;
+  charge_name?: string;
+  charge_id?: string;
+  free_pro_plan_date?: string;
+  theme_id?: string;
+  theme_name?: string;
+  theme_v2?: boolean;
+  shopify_alert?: boolean;
+  onboard?: boolean;
 }
 
 export interface BeforeMiniState {

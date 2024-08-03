@@ -13,6 +13,7 @@ import { updateGrayMode } from '@/logics/theme/updateGrayMode';
 
 import { useAppStore } from '@/store/modules/app';
 import { useLocaleStore } from '@/store/modules/locale';
+import { useShopifyAppBridgeStoreWithOut } from '@/store/modules/shopifyAppBridge';
 
 import { getCommonStoragePrefix, getStorageShortName } from '@/utils/env';
 
@@ -22,10 +23,15 @@ import { Persistent } from '@/utils/cache/persistent';
 
 // Initial project configuration
 export function initAppConfigStore() {
+  // Init Shopify AppBridge State
+  const appBridgeStore = useShopifyAppBridgeStoreWithOut();
+  appBridgeStore.initShopifyAppBridge();
+
   const localeStore = useLocaleStore();
   const appStore = useAppStore();
   let projCfg = Persistent.getLocal<ProjectConfig>(PROJ_CFG_KEY);
   projCfg = deepMerge(projectSetting, projCfg || {});
+  projCfg = deepMerge(projCfg, appBridgeStore.getProjectSetting);
   const darkMode = appStore.getDarkMode;
   const {
     colorWeak,

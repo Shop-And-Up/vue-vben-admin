@@ -1,0 +1,12 @@
+<svg width="250" height="100" viewBox="0 0 250 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M50 0H100V50H50V0Z" fill="#EBEDF0"/>
+<path d="M0 50H50V100H0V50Z" fill="#EBEDF0"/>
+<path d="M99.9995 50H150V100H99.9995V50Z" fill="#EBEDF0"/>
+<path d="M150 0H200V50H150V0Z" fill="#EBEDF0"/>
+<path d="M200 50H250V100H200V50Z" fill="#EBEDF0"/>
+<rect width="50" height="50" fill="currentColor"/>
+<rect x="50" y="50" width="50" height="50" fill="currentColor"/>
+<rect x="100" width="50" height="50" fill="currentColor"/>
+<rect x="150" y="50" width="50" height="50" fill="currentColor"/>
+<rect x="200" width="50" height="50" fill="currentColor"/>
+</svg>

@@ -1,3 +1,4 @@
+import { join } from 'path';
 import { defineApplicationConfig } from '@vben/vite-config';
 
 export default defineApplicationConfig({
@@ -14,7 +15,20 @@ export default defineApplicationConfig({
         'ant-design-vue/es/locale/en_US',
       ],
     },
+    resolve: {
+      alias: [
+        {
+          find: /@coreThemeExt\//,
+          replacement: join(process.cwd(), './core/vue-libs/'),
+        },
+        {
+          find: /@coreThemeExt/,
+          replacement: join(process.cwd(), './core/vue-libs/index'),
+        },
+      ],
+    },
     server: {
+      port: 3100,
       proxy: {
         '/basic-api': {
           target: 'http://localhost:3000',

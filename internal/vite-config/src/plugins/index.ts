@@ -3,6 +3,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx';
 import { type PluginOption } from 'vite';
 import purgeIcons from 'vite-plugin-purge-icons';
 import DevTools from 'vite-plugin-vue-devtools';
+import svgLoader from 'vite-svg-loader';
 
 import { createAppConfigPlugin } from './appConfig';
 import { configCompressPlugin } from './compress';
@@ -35,6 +36,9 @@ async function createPlugins({ isBuild, root, enableMock, compress, enableAnalyz
 
   // vite-plugin-purge-icons
   vitePlugins.push(purgeIcons());
+
+  // vite-plugin-svg-loader
+  vitePlugins.push(svgLoader());
 
   // The following plugins only work in the production environment
   if (isBuild) {

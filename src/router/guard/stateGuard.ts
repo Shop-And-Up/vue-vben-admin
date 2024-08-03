@@ -7,6 +7,33 @@ import { PageEnum } from '@/enums/pageEnum';
 import { removeTabChangeListener } from '@/logics/mitt/routeChange';
 
 export function createStateGuard(router: Router) {
+  // EthanWilson - Start
+  router.beforeEach(async (to, _, next) => {
+    const userStore = useUserStore();
+    if (userStore.$state.userInfo) {
+      if (userStore.$state.userInfo?.onboard) {
+        if (to.path != PageEnum.ONBOARD) {
+          next({
+            path: PageEnum.ONBOARD,
+            replace: true,
+          });
+          return;
+        }
+      } else {
+        if (to.path == PageEnum.ONBOARD) {
+          next({
+            path: PageEnum.BASE_HOME,
+            replace: true,
+          });
+          return;
+        }
+      }
+    }
+
+    next();
+  });
+  // EthanWilson - End
+
   router.afterEach((to) => {
     // Just enter the login page and clear the authentication information
     if (to.path === PageEnum.BASE_LOGIN) {

@@ -1,0 +1,4 @@
+Product Id,Product Handle (Required if Product_Id empty),Rating,Customer Email (optional),Country Code,Customer Name,Feedback,Feedback Date,Image 1 (optional),Image 2 (optional),Image 3 (optional),Image 4 (optional)
+6783175524527,,5,,US,Customer Name,Review from customer,2021-08-20T03:26:00.000Z,https://domain/image-path.png,,,https://domain/image-path.png
+9317552452799,,5,,US,Customer Name,Review from customer,2021-08-20T03:26:00.000Z,https://domain/image-path.png,,,https://domain/image-path.png
+,blue-silk-tuxedo,5,,US,Customer Name,Review from customer,2021-08-20T03:26:00.000Z,https://domain/image-path.png,,,https://domain/image-path.png

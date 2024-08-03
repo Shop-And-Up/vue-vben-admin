@@ -17,8 +17,13 @@ import { setupRouterGuard } from '@/router/guard';
 import { setupStore } from '@/store';
 
 import App from './App.vue';
+import PusherService from './plugins/pusher';
+import { initCrisp } from './plugins/crisp';
 
 async function bootstrap() {
+  PusherService.init();
+  initCrisp();
+
   const app = createApp(App);
 
   // Configure store

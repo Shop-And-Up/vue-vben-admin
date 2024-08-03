@@ -1,6 +1,7 @@
 import type { Router, RouteRecordRaw } from 'vue-router';
 
 import { usePermissionStoreWithOut } from '@/store/modules/permission';
+import { useShopifyAppBridgeStoreWithOut } from '@/store/modules/shopifyAppBridge';
 
 import { PageEnum } from '@/enums/pageEnum';
 import { useUserStoreWithOut } from '@/store/modules/user';
@@ -18,6 +19,8 @@ const whitePathList: PageEnum[] = [LOGIN_PATH];
 export function createPermissionGuard(router: Router) {
   const userStore = useUserStoreWithOut();
   const permissionStore = usePermissionStoreWithOut();
+  const appBridgeStore = useShopifyAppBridgeStoreWithOut();
+
   router.beforeEach(async (to, from, next) => {
     if (
       from.path === ROOT_PATH &&
@@ -28,6 +31,40 @@ export function createPermissionGuard(router: Router) {
       next(userStore.getUserInfo.homePath);
       return;
     }
+
+    // Customize by EthanWilson - Start
+    let userInfo: any;
+    if (appBridgeStore.getIsEmbedded) {
+      // Auth from Shopify Admin
+      userInfo = await userStore.checkShopifyEmbed(to.query);
+    } else {
+      // Auth with token on params
+      userInfo = await userStore.checkTokenFromParams(to.query);
+
+      if (!userInfo && to.query.shop) {
+        // Install from Shopify App Store
+        const domain: string = to.query.shop as string;
+        const url =
+          'localhost:12' +
+          '/auth/generate?subdomain=' +
+          domain
+            .replace(/\s/g, '')
+            .replace('https://', '')
+            .replace('http://', '')
+            .replace('.myshopify.com', '');
+
+        window.location.href = url;
+      }
+    }
+
+    if (userInfo) {
+      next({
+        path: to.path,
+        replace: true,
+      });
+      return;
+    }
+    // Customize by EthanWilson - End
 
     const token = userStore.getToken;
 
